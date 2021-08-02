@@ -1,0 +1,60 @@
+{
+    "extends": [
+        "eslint-config-airbnb",
+        "plugin:vue/recommended"
+    ],
+    "parserOptions": {
+        "parser": "babel-eslint"
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true,
+        "mocha": true
+    },
+    "plugins": [
+        "vue"
+    ],
+    "rules": {
+        "indent": [
+            "warn",
+            4
+        ],
+        "prefer-destructuring": [
+            "error",
+            {
+                "array": false,
+                "object": true
+            },
+            {
+                "enforceForRenamedProperties": false
+            }
+        ],
+        "operator-linebreak": 0,
+        "no-param-reassign": 0,
+        "space-before-function-paren": 0,
+        "object-shorthand": 0,
+        "arrow-parens": 0,
+        "no-unused-vars": 0,
+        "linebreak-style": 0,
+        "comma-dangle" : 0,
+        "valid-jsdoc": ["error", {
+            "requireReturn": true,
+            "requireReturnType": true,
+            "requireParamDescription": true,
+            "requireReturnDescription": true
+        }],
+        "require-jsdoc": ["error", {
+            "require": {
+                "FunctionDeclaration": true,
+                "MethodDefinition": true,
+                "ClassDeclaration": true
+            }
+        }],
+        "prefer-template" : 0,
+        "no-underscore-dangle": 0,
+        "import/prefer-default-export": "off",
+        "no-restricted-syntax": "off",
+        "max-len": "off"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "presets": ["@babel/preset-env"],
+    "ignore": ["**/*.sample.js"],
+    "plugins": [
+        [
+            "i18next-extract",
+            {
+                "outputPath": "dist/locales/{{locale}}/{{ns}}.json",
+                "i18nextInstanceNames": ["i18next", "i18n", "Language"],
+                "useI18nextDefaultValue": ["fr"],
+                "jsonSpace": 4
+            }
+        ],
+        [
+            "@babel/plugin-transform-runtime",
+            {
+                "regenerator": true
+            }
+        ]
+    ]
+}

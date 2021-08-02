@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Bar</title>
+    <script src="/assets/config.socket.js"></script>
+    <script src="/assets/socket.io.js"></script>
+    <script src="/assets/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/assets/animate.min.css"/>
+    <style>        
+        .news-block {
+            display: inline-block;
+            height: 100px;
+            top: 0px;
+            padding: 0px;
+            margin: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div
+            class="news-block"
+            id="news-barre"
+            style="
+                background-image: url('/assets/Tchat_Barre_Red.png');
+                width: 25px;
+                height: 100px;
+            "
+        ></div>
+        <div class="news-block" style="width: 10%" id="news-title"></div>
+        <div class="news-block" style="width: 80%" id="news-discription"></div>
+    </div>
+
+    <script>
+        const socket = io(configUrl);
+        const tryReconnect = () => {
+        setTimeout(() => {
+            socket.io.open((err) => {
+            if (err) {
+                tryReconnect();
+            }
+            });
+        }, 2000);
+        }
+
+        socket.io.on("close", tryReconnect);
+
+
+        socket.on('displayNews', (news) => {
+            console.log(news);
+            $("#news-title").html(news.titre);
+            $("#news-discription").html(news.description);
+        });
+        function getHueRotateByColor() {
+
+        }
+        function getcolors(x) {
+            const red = Math.sqrt(Math.cos(x + (Math.PI + 1) / 2) + 1 / 2);
+            const green = Math.sqrt(Math.cos(x) + 1 / 2);
+            const blue = Math.sqrt(Math.cos(x - (Math.PI + 1) / 2) + 1 / 2);
+            return { r: red, g: green, b: blue };
+        }
+        function componentToHex(c) {
+            const hex = c.toString(16);
+            return hex.length === 1 ? '0' + hex : hex;
+        }
+        function rgbToHex(r, g, b) {
+            return (
+                '#' +
+                componentToHex(r) +
+                componentToHex(g) +
+                componentToHex(b)
+            );
+        }
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(
+                hex
+            );
+            return result
+                ? {
+                      r: parseInt(result[1], 16),
+                      g: parseInt(result[2], 16),
+                      b: parseInt(result[3], 16),
+                  }
+                : null;
+        }
+    </script>
+</body>
+</html>
